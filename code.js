@@ -1,12 +1,6 @@
-
-import processing.sound.*;
-SoundFile file;
 void setup() {
   size(400, 400);
-file = new SoundFile(this, "music.mp3");
-  file.play();
 }
-frameRate(120);
 var x = 5;
 var y = 351;
 var c1 = -60;
@@ -19,7 +13,7 @@ var levelSelect = false;
 var pause = false;
 //done
 var jt = 0;
-var version = "Alpha 0.1.0";
+var version = "Alpha 0.1.5";
 var titleSize = 20;
 var r1 = 0;
 var WhatsNew = false;
@@ -37,9 +31,20 @@ var cheat = false;
 var t1 = 0;
 
     void draw() {
-frameRate(60);
-
-    //scale(1.5);
+        var pauseButton = function() {
+    fill(181, 181, 181);
+    if(mouseX>340&&mouseX<390&&mouseY>5&&mouseY<25) {
+        fill(31, 31, 31);
+    }
+    rect(340,5,50,20);
+    if(mousePressed&&mouseX>340&&mouseX<390&&mouseY>5&&mouseY<25) {
+        pause = true;
+    }
+    
+    fill(255, 255, 255);
+    text("Pause",344,15);
+};
+    
     //character
     var character = function() {
         if(options.sky===true) {
@@ -125,7 +130,7 @@ frameRate(60);
     //title
     if(level === 0) {
         textAlign(LEFT,CENTER);
-        
+        frameRate(60);
         textSize(50);
         background(87, 255, 249);
         character();
@@ -300,7 +305,7 @@ frameRate(60);
         }
         if(mousePressed&&mouseX>140&&mouseX<260&&mouseY>150&&mouseY<180) {
                 options.cheats=options.cheats?false:true;
-                mousePressed=false;
+                mouseIsPressed=false;
         }
         stroke(0, 0, 0);
             rect(140,150,120,30);
@@ -453,7 +458,7 @@ frameRate(60);
                     fill(82, 82, 82);
                 }
         }
-        if(mousePressed&&mouseX>75&&mouseX<125&&mouseY>130&&mouseY<180) {
+        if(mouseIsPressed&&mouseX>75&&mouseX<125&&mouseY>130&&mouseY<180) {
             fill(0, 0, 0);
             x=5;
             level = 4;
@@ -469,7 +474,7 @@ frameRate(60);
     }   
     //completed levels
     if(level===1) {
-        
+        frameRate(60);
     textSize(15);
     background(87, 255, 249);
     character();
@@ -485,6 +490,7 @@ frameRate(60);
         level = 2;
         x=330;
     }
+    pauseButton();
     }
     if(level === 2) {
         background(87, 255, 249);
@@ -536,7 +542,7 @@ frameRate(60);
     character();
     fill(0, 0, 0);
     text("Level 3",5,15);
-    
+    frameRate(60);
     fill(random(0,255),random(0,255),random(0,255));
     if(options.FancyGraphics===false) {
         fill(random(1,255));
@@ -617,5 +623,39 @@ frameRate(60);
                 
                 
                 
+    }
+    if(pause === true) {
+        options.sky = false;
+        background(87, 255, 249);
+        character();
+        x = 20;
+        y = 355;
+        fill(0, 0, 0);
+        text("Pause Menu",7,12);
+        fill(255, 255, 255);
+        if(mouseX>100&&mouseX<300&&mouseY>50&&mouseY<80) {
+            fill(204, 204, 204);
+        }
+        rect(100,50,200,30);
+        
+        fill(255, 255, 255);
+        if(mouseX>100&&mouseX<300&&mouseY>100&&mouseY<130) {
+            fill(204, 204, 204);
+        }
+        rect(100,100,200,30);
+        
+        if(mousePressed&&mouseX>100&&mouseX<300&&mouseY>50&&mouseY<80) {
+            options.sky = true;
+            pause = false;
+        }
+        if(mousePressed&&mouseX>100&&mouseX<300&&mouseY>100&&mouseY<130) {
+            options.sky = true;
+            level = 0;
+            
+            pause = false;
+        }
+        fill(0, 0, 0);
+        text("Resume",173,62);
+        text("Main Menu",163,112);
     }
 };
