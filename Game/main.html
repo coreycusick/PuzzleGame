@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Puzzle Game Alpha</title>
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div id="navbar">
+			<div style="display:inline-block;" id="logo">
+				<img align="center" src="./images/logo.svg" height="40px" alt = "ERROR" width="40px"</img> |
+			</div>
+			<div style="display: inline-block;" class="menu">
+  <button style="" class="menubtn">Vocab</button>
+  <div class="dropdown-content1">
+			<a href="/21.Corey.Cusick/web_design/vocabulary/default.html" target="_blank" >Definitions Page</a>
+			
+  </div>
+  
+  |
+ 
+  </div>
+  
+  <div style="display: inline-block;" class="menu2">
+  <button class="menubtn2">Exercises</button> |
+  <div class="dropdown-content2">
+			
+			<a href="/21.Corey.Cusick/web_design/vocabulary/default.html" target=_blank >Exercise One</a>
+				<a href="/21.Corey.Cusick/web_design/exercises/exercise_two.html" target=_blank >Exercise Two</a></li>
+				<a href="/21.Corey.Cusick/web_design/exercises//exercise_three/exercise_three.html" target=_blank >Exercise Three</a>
+				<a href="/21.Corey.Cusick/web_design/exercises/exercise_four.html" target=_blank >Exercise Four</a>
+				<a href="/21.Corey.Cusick/web_design/exercises/exercise_five.html" target=_blank >Exercise Five</a>
+				<a href="/21.Corey.Cusick/web_design/exercises/exercise_six.html" target=_blank >Exercise Six</a>
+				<a href="/21.Corey.Cusick/web_design/exercises/exercise_seven.html" target=_blank >Exercise Seven</a>
+				<a href="/21.Corey.Cusick/web_design/exercises/exercise_eight.html" target=_blank >Exercise Eight</a>
+				<a href="/21.Corey.Cusick/web_design/exercises/exercise_nine.html" target=_blank >Exercise Nine</a>
+				<a href="/21.Corey.Cusick/web_design/exercises/exercise_ten.html" target=_blank >Exercise Ten</a>
+  </div>
+  
+  </div>
+  
+  <div style="display: inline-block;" class="menu2">
+  <button class="menubtn2">BPA</button>
+  <div class="dropdown-content2">
+			
+			<a href="\\studentfiles\21.Corey.Cusick\web_design\BPA\Game\main.html" target="_blank">Game(OLD) </a>
+			<a href="\\studentfiles\21.Corey.Cusick\web_design\BPA\Game\mainNew.html" target="_blank">Game(NEW) </a>
+  </div>
+  </div>
+  
+  
+  </div>
+
+<div id="main">
+<div id="head">
+<h1>Puzzle Game</h1>
+</div>
+
+<div id="howtoplay">
+	<p>How to Play:</p>
+	<p>Use W,A,S,D to move the character to <br> the multi color portal at the end of the screen<p>
+</div>
+
+<div id="reset">
+
+<div class="tooltip">
+<button onClick="history.go(0)" class="resetbtn">Reset</button>
+  <span class="tooltiptext"> - Reset Game</span>
+</div>
+
+<!--
+<INPUT TYPE="button" onClick="history.go(0)" VALUE="Refresh">
+-->
+
+</div>
+</div>
+
+
+
+<div id="game">
+<script src="processing.js"></script>
+<script type="text/processing" data-processing-target="mycanvas">
+void setup() {
+/* @pjs preload="character.png"; */
+/* @pjs preload="cloud.png"; */
+  size(800, 800);
+  
+}
+var scaleAmount = 2;
+	
+	PImage clouds;
+	clouds = loadImage("clouds.png");
+
+
+/*
+if you have epilepsy, please turn BasicPortals on line 7 from "false" to "true:
+*for changelog, please see Whats New in menu
+*Created by Downpour Games
+*/
+var bp = 0;
+var b1 = 0;
+var b2 = 0;
+var b3 = 0;
+var cloudX = 0;
+var BasicPortals=true;
+var PlayerX = 5;
+var PlayerY = 351;
+var c1 = -60;
+var name = "Player";
+var gravity = true;
+//level for debugging only
+var level = 0;
+//working on
+var levelSelect = false;
+var pause = false;
+//done
+var jt = 0;
+var version = "Beta 0.0.2";
+var titleSize = 20;
+var r1 = 0;
+var WhatsNew = false;
+var optionsScreen = false;
+   
+    var options = {
+sky: true,
+FancyGraphics: true,
+mobile: false,
+cheats: false,
+portals : true
+};
+var functions = [];
+var mPressed;
+var mobile = false;
+var cheat = false;
+var t1 = 0;
+var platformOn=false;
+var switchFlipped=false;
+var color1 = 255;
+var x = random(0,4);
+var portal = function(x,y) {
+    if(BasicPortals===false) {
+    fill(random(0,255),random(0,255),random(0,255));
+    }
+    if(options.FancyGraphics===false&&BasicPortals===false) {
+        
+        fill(random(1,255));
+    }
+    if(BasicPortals===true) {
+            bp = bp + 1;
+            if(bp >= 30) { 
+            b1 = random(0,255);
+            b2 = random(0,255);
+            b3 = random(0,255);
+            bp = 0;
+            } else {
+                fill(b1,b2,b3);
+            }
+        }
+    rect(x,y,50,50,30);
+    
+    if(PlayerX>x&&PlayerX<x+50&&PlayerY>y&&PlayerY<y+50) {
+        level = level+1;
+        PlayerX=30;
+        PlayerY=340;
+    }
+};
+var lever = function(x,y,l) {
+fill(0, 0, 0);
+if(switchFlipped===false) {
+rect(x+7,y-5,2,5);
+} if(switchFlipped===true) {
+rect(x+7,y-1,2,5);
+}
+fill(110, 110, 110);
+rect(x,y,15,5);
+if(PlayerX>x&&PlayerX<x+15&&PlayerY>y-l&&PlayerY<y) {
+    switchFlipped=true;
+} else {
+    switchFlipped=false;
+}
+
+};
+var platform = function(x1,y1,l1,w1) {
+    fill(0, 0, 0);
+rect(x1,y1,l1,w1);
+if(PlayerX>x1&&PlayerX<x1+l1&&PlayerY>y1-30&&PlayerY<y1) {
+    platformOn=true;
+    PlayerY = y1-30;
+} else {
+    platformOn=false;
+}
+noStroke();
+};
+var platform2 = function(x2,y2,l2,w2) {
+    fill(0, 0, 0);
+rect(x2,y2,l2,w2);
+if(PlayerX>x2&&PlayerX<x2+l2&&PlayerY>y2-30&&PlayerY<y2) {
+    gravity = false;
+    platformOn=true;
+} else {
+    gravity = true;
+    platformOn=false;
+}
+noStroke();
+};
+var platform3 = function(x,y,l,w) {
+    fill(0, 0, 0);
+    if(platformOn===true) {
+    //stroke(247, 247, 247);
+    }
+rect(x,y,l,w);
+if(PlayerX>x&&PlayerX<x+l&&PlayerY>y-30&&PlayerY<y) {
+    gravity = false;
+    platformOn=true;
+} else {
+    gravity = true;
+    platformOn=false;
+}
+noStroke();
+};
+var platform4 = function(x,y,l,w) {
+    fill(0, 0, 0);
+    if(platformOn===true) {
+    //stroke(247, 247, 247);
+    }
+rect(x,y,l,w);
+if(PlayerX>x&&PlayerX<x+l&&PlayerY>y-30&&PlayerY<y) {
+    gravity = false;
+    platformOn=true;
+} else {
+    gravity = true;
+    platformOn=false;
+}
+noStroke();
+};
+var levitation = function(x5,y5,l,w) {
+    fill(0, 0, 0);
+    if(platformOn===true) {
+    stroke(247, 247, 247);
+    }
+rect(x5,y5,l,w);
+if(PlayerX>x5&&PlayerX<x5+l&&PlayerY>y5-300&&PlayerY<y5) {
+    //gravity = false;
+    platformOn=true;
+    PlayerY=PlayerY-3.5;
+} else{
+    //gravity = true;
+    platformOn=false;
+}
+noStroke();
+};
+
+     draw = function() {
+	 
+	 scale(scaleAmount);
+        var pauseButton = function() {
+    fill(181, 181, 181);
+    if(mouseX>340*scaleAmount&&mouseX<390*scaleAmount&&mouseY>5*scaleAmount&&mouseY<25*scaleAmount) {
+        fill(31, 31, 31);
+    }
+    rect(340,5,50,20);
+    if(mousePressed&&mouseX>340*scaleAmount&&mouseX<390*scaleAmount&&mouseY>5*scaleAmount&&mouseY<25*scaleAmount) {
+        pause = true;
+    }
+    
+    fill(255, 255, 255);
+    text("Pause",344,15);
+};
+    
+    //character
+    var character = function() {
+	PImage character;
+    character = loadImage("character.png");
+	
+	if(cloudX>450) {
+	cloudX=-200;
+	}
+	cloudX=cloudX+2;
+	image(character, PlayerX, PlayerY,20,30);
+	image(clouds,cloudX,30,200,200);
+    };
+    //controls
+    if(level>0) {
+    if(keyPressed&&keyCode===RIGHT) {
+        if(mobile===true) {
+         PlayerX=PlayerX+2;   
+        } else {
+        PlayerX=PlayerX+1;
+}
+    }
+    if(keyPressed&&keyCode===LEFT) {
+        if(mobile===true) {
+         PlayerX=PlayerX-2;   
+        } else {
+        PlayerX=PlayerX-1;
+        }
+        
+    }
+    if(level===1&&level>2) {
+    if(keyPressed&&keyCode===UP) {
+        PlayerY=PlayerY-1.5;
+        
+        
+    } 
+    } else if(PlayerY<355&&gravity === true) {
+        PlayerY=PlayerY+1;
+    }
+    var fall = function() {
+        
+    };
+    }
+    var message = ["Beta","  Not \n done", "Bugs", "Oh-No"];
+    
+    var r = round(x);
+    var tm = message[r];
+    //game
+    
+    //title
+    if(level === 0) {
+        textAlign(LEFT,CENTER);
+        
+        if(mobile===true) {
+        frameRate(random(60,60));    
+        } else {
+            frameRate(60);
+        }
+        textSize(50);
+        background(87, 255, 249);
+        fill(106, 255, 61);
+        rect(-1,370,600,30);
+        character();
+        if(BasicPortals === false) {
+        fill(random(250,255), random(100,255), random(100,255));
+        if(options.FancyGraphics===false) {
+            fill(random(1,255));
+        }
+        }
+        if(BasicPortals===true) {
+            bp = bp + 1;
+            if(bp >= 20) { 
+            b1 = random(0,255);
+            b2 = random(0,255);
+            b3 = random(0,255);
+            bp = 0;
+            } else {
+                fill(b1,b2,b3);
+            }
+        }
+        text("Puzzle Game",50,83);
+        
+        
+        fill(17, 0, 255);
+        if(options.FancyGraphics===false) {
+            fill(94, 94, 94);
+        }
+        //title message
+        textSize(titleSize);
+        titleSize = titleSize + 0.2;
+        if(titleSize > 25) {
+            titleSize = 20;
+        }
+        
+        rotate(-15);
+        text(tm,277,190);
+        rotate(15);
+        noFill();
+        stroke(0, 0, 0);
+        textSize(12);
+        //play
+        if(mouseX>157*scaleAmount&&mouseY>179*scaleAmount&&mouseY<209*scaleAmount&&mouseX<227*scaleAmount) {
+            fill(86, 60, 252);
+            if(options.FancyGraphics===false){
+                    fill(82, 82, 82);
+                }
+        } else {
+            fill(255, 255, 255);
+        }
+        rect(157,179,70,30);
+        if(mousePressed&&mouseX>157*scaleAmount&&mouseY>179*scaleAmount&&mouseY<209*scaleAmount&&mouseX<227*scaleAmount&&WhatsNew===false&&optionsScreen===false) {
+            if(options.cheats===true) {
+                cheat=true;
+            }
+            if(options.cheats===false) {
+            level=1;
+            PlayerX=5;
+            }
+        }
+        fill(0, 0, 0);
+        text("Play",179,199);
+        //options
+        fill(255, 255, 255);
+        
+        //
+        if(mouseX>157*scaleAmount&&mouseY>229*scaleAmount&&mouseY<259*scaleAmount&&mouseX<227*scaleAmount) {
+            fill(86, 60, 252);
+            if(options.FancyGraphics===false){
+                    fill(82, 82, 82);
+                }
+        }
+        rect(157,229,70,30);
+        if(mousePressed&&mouseX>157*scaleAmount&&mouseY>229*scaleAmount&&mouseY<259*scaleAmount&&mouseX<227*scaleAmount&&WhatsNew===false) {
+            optionsScreen = true;
+        }
+        //whats new
+        fill(255, 255, 255);
+        if(mouseX>157*scaleAmount&&mouseY>280*scaleAmount&&mouseY<310*scaleAmount&&mouseX<227*scaleAmount) {
+            fill(86, 60, 252);
+            if(options.FancyGraphics===false){
+                    fill(82, 82, 82);
+                }
+        }
+        rect(157,280,70,30);
+        if(mousePressed&&mouseX>157*scaleAmount&&mouseY>280*scaleAmount&&mouseY<310*scaleAmount&&mouseX<227*scaleAmount) {
+            WhatsNew = true;
+        }
+        
+        //rest
+        fill(0, 0, 0);
+        text("Options",172,249);
+        text("Whats New",161,300);
+        textSize(12);
+        //rotate(r1);
+        noStroke();
+        fill(0, 0, 0);
+        text(version,5,390);
+        fill(random(0,255),random(0,255),random(0,255));
+        if(options.FancyGraphics===false) {
+        fill(random(0,255));
+        }
+        if(BasicPortals===true) {
+                fill(b1,b2,b3);
+        }
+    rect(340,337,50,50,30);
+    
+    rotate(-r1);
+    fill(0, 0, 0);
+    text(version,5,390);
+    if(PlayerX<340) {
+    PlayerX=PlayerX+1;
+    
+    } if(PlayerX>=340) {
+        r1=r1+0;
+        if(r1 === 0) {
+            r1 = 0;
+            PlayerX = 5;
+        }
+    }
+    fill(0, 0, 0);
+    
+    }
+    //whats new
+    if(WhatsNew === true) {
+        background(87, 255, 249);
+        fill(106, 255, 61);
+        rect(-1,370,600,30);
+        character();
+        fill(random(0,255),random(0,255),random(0,255));
+        if(options.FancyGraphics===false) {
+        fill(random(0,255));
+        }
+        if(BasicPortals===true) {
+                fill(b1,b2,b3);
+        }
+    rect(340,337,50,50,30);
+        fill(255, 255, 255);
+        if(mouseX>170*scaleAmount&&mouseX<235*scaleAmount&&mouseY>350*scaleAmount&&mouseY<397*scaleAmount) {
+                fill(86, 60, 252);
+            if(options.FancyGraphics===false){
+                    fill(82, 82, 82);
+                }
+        }
+            stroke(0, 0, 0);
+            rect(170,350,60,30);
+            fill(0, 0, 0);
+            text("Back",188,367);
+            if(mousePressed&&mouseX>170*scaleAmount&&mouseX<235*scaleAmount&&mouseY>350*scaleAmount&&mouseY<397*scaleAmount) {
+            noStroke();
+            //fill(0, 0, 0);
+            //rect(-1,-1,405,405);
+            WhatsNew = false;
+            var x = random(0,1);
+        }
+        fill(0, 0, 0);
+        textSize(20);
+        text("Whats New!",140,20);
+        textSize(12);
+        text("version : " + version,5,15);
+        text("mobile : " + options.mobile,5,25);
+        fill(255, 255, 255);
+        rect(10,40,380,300);
+        fill(0, 0, 0);
+        text("-Beta 0.0.1 \n *Mobile Mode now functions on most browsers \n *Mobile mode now no longer stays enabled after disable \n *Code slightly faster \n *Fixed some bugs",20,100);
+        text("-Beta 0.0.1 Bugs \n *some phones have been tested and the controls work, however \n  the game is not the best performing(will be fixed soon)\n *Level 4 is not passable\n *GUI is laggy on most phones",20,200);
+    }
+    
+    //whats new
+    if(cheat === true) {
+        t1 = t1 +1;
+        background(0, 0, 0);
+        fill(255, 0, 0);
+        textSize(30);
+        text("Warning: Cheats are enabled",7,200);
+        textSize(12);
+        fill(255, 255, 255);
+        text("Click anywhere to continue",130,240);
+        if(mousePressed&& t1 > 20) {
+            
+            levelSelect=true;
+        }
+        if(levelSelect === true&&pause===false&&optionsScreen===false) {
+        background(87, 255, 249);
+        fill(106, 255, 61);
+        rect(-1,370,600,30);
+        character();
+        fill(random(0,255),random(0,255),random(0,255));
+        if(options.FancyGraphics===false) {
+        fill(random(0,255));
+        }
+    rect(340,337,50,50,30);
+        textSize(20);
+        fill(0, 0, 0);
+        text("Level Select",140,10);
+        fill(99, 99, 99);
+        rect(30,30,340,300);
+        //level 1
+        fill(255, 255, 255);
+        if(mouseX>75*scaleAmount&&mouseX<125*scaleAmount&&mouseY>60*scaleAmount&&mouseY<110*scaleAmount) {
+            fill(86, 60, 252);
+            if(options.FancyGraphics===false){
+                    fill(82, 82, 82);
+                }
+        }
+        if(mousePressed&&mouseX>75*scaleAmount&&mouseX<125*scaleAmount&&mouseY>60*scaleAmount&&mouseY<110*scaleAmount) {
+            fill(0, 0, 0);
+            PlayerX=5;
+            level = 1;
+           
+        }
+        rect(75,60,50,50);
+        fill(0, 0, 0);
+        textSize(12);
+        text("Level 1",81,80);
+        //level 2
+        fill(255, 255, 255);
+        if(mouseX>175*scaleAmount&&mouseX<225*scaleAmount&&mouseY>60*scaleAmount&&mouseY<110*scaleAmount) {
+            fill(86, 60, 252);
+            if(options.FancyGraphics===false){
+                    fill(82, 82, 82);
+                }
+        }
+        if(mousePressed&&mouseX>175*scaleAmount&&mouseX<225*scaleAmount&&mouseY>60*scaleAmount&&mouseY<110*scaleAmount) {
+            fill(0, 0, 0);
+            PlayerX=5;
+            level = 2;
+           
+        }
+        rect(175,60,50,50);
+        
+        fill(0, 0, 0);
+        textSize(12);
+        text("Level 2",180,80);
+        //level 3
+        fill(255, 255, 255);
+        if(mouseX>275*scaleAmount&&mouseX<325*scaleAmount&&mouseY>60*scaleAmount&&mouseY<110*scaleAmount) {
+            fill(86, 60, 252);
+            if(options.FancyGraphics===false){
+                    fill(82, 82, 82);
+                }
+        }
+        if(mousePressed&&mouseX>275*scaleAmount&&mouseX<325*scaleAmount&&mouseY>60*scaleAmount&&mouseY<110*scaleAmount) {
+            fill(0, 0, 0);
+            PlayerX=5;
+            level = 3;
+           
+        }
+        rect(275,60,50,50);
+        
+        fill(0, 0, 0);
+        textSize(12);
+        text("Level 3",280,80);
+        //level 4
+        fill(255, 255, 255);
+        if(mouseX>75*scaleAmount&&mouseX<125*scaleAmount&&mouseY>130*scaleAmount&&mouseY<180*scaleAmount) {
+            fill(86, 60, 252);
+            if(options.FancyGraphics===false){
+                    fill(82, 82, 82);
+                }
+        }
+        if(mousePressed&&mouseX>75*scaleAmount&&mouseX<125*scaleAmount&&mouseY>130*scaleAmount&&mouseY<180*scaleAmount) {
+            fill(0, 0, 0);
+            PlayerX=5;
+            level = 4;
+           
+        }
+        rect(75,130,50,50);
+        
+        fill(0, 0, 0);
+        textSize(12);
+        text("Level 4",80,150);
+        }
+        
+    }   
+    //completed levels
+    if(level === 1) {
+        frameRate(60);
+    textSize(15);
+    background(87, 255, 249);
+    fill(106, 255, 61);
+    rect(-1,370,600,30);
+    character();
+    fill(0, 0, 0);
+    text("Level 1",5,15);
+    portal(340,340);
+    pauseButton();
+    }
+    if(level === 2) {
+        background(87, 255, 249);
+        textSize(15);
+        fill(106, 255, 61);
+        rect(-1,370,600,30);
+    character();
+    fill(0, 0, 0);
+    text("Level 2",5,15);
+    portal(340,31);
+    //1st levitator
+    fill(0, 0, 0);
+    rect(10,380,40,10);
+    if(PlayerX>10&&PlayerX<50&&PlayerY<360) {
+        PlayerY=PlayerY-2;
+    }
+    //2nd levitator
+    fill(0, 0, 0);
+    rect(165,280,40,10);
+    if(PlayerX>165&&PlayerX<205&&PlayerY<280) {
+        PlayerY=PlayerY-2;
+    }
+    //3rd levitator
+    fill(0, 0, 0);
+    rect(305,200,40,10);
+    if(PlayerX>305&&PlayerX<345&&PlayerY<200) {
+        PlayerY=PlayerY-2;
+    }
+    if(keyPressed&&keyCode===DOWN) {
+        PlayerY=PlayerY+2;
+    } //y=370;
+    //}
+    pauseButton();
+    }
+    //working on
+    if(level === 3) {
+        
+        background(87, 255, 249);
+        textSize(15);
+        fill(106, 255, 61);
+        rect(-1,370,600,30);
+    character();
+    fill(0, 0, 0);
+    text("Level 3",5,15);
+    frameRate(60);
+    portal(5,50);
+    platform(250,200,50,10);
+    if(PlayerX>250&&PlayerX<300&&PlayerY<50&&PlayerY>21) {
+        PlayerY=PlayerY-2;
+    }
+    levitation(100,330,50,10);
+    if(PlayerX>100&&PlayerX<150&&PlayerY<150&&PlayerY>10) {
+        PlayerY=PlayerY-2;
+    }
+    lever(350,385,385);
+    if(switchFlipped===true) {
+        PlayerY=PlayerY-2.5;
+    } else if(switchFlipped&&PlayerY>355) {
+        PlayerY=PlayerY+2;
+    }
+    pauseButton();
+    }
+    if(level === 4) {
+        background(20, 20, 20);
+        options.sky=false;
+        fill(17, 51, 0);
+        rect(-1,370,600,30);
+        //moon
+            fill(240, 240, 240);
+            ellipse(30,30,50,50);
+            fill(99, 99, 99);
+            ellipse(40,40,5,5);
+            ellipse(20,14,5,5);
+            ellipse(30,20,3,3);
+            ellipse(20,30,2,2);
+            ellipse(46,29,2,2);
+            ellipse(32,35,3,3);
+            ellipse(26,50,4,4);
+        //background
+        fill(48, 29, 0);
+        rect(300,295,110,90);
+        fill(10, 3, 0);
+        //door
+        rect(340,335,30,50);
+        fill(230,255,0,20);
+        arc(370,359,10,10,90,270);
+        
+        arc(370,359,15,15,90,270);
+        
+        character();
+        if(PlayerX>340&&PlayerX<370) {
+            level = 4.1;
+        }
+            //level
+                
+                
+      pauseButton();          
+    }
+    if(level === 4.1) {
+        background(48, 29, 0);
+        fill(92, 55, 0);
+        rect(-1,370,600,30);
+        character();
+        portal(10,10);
+        
+        
+        
+        pauseButton();
+    }
+    //Pause Screen
+    if(pause === true) {
+        
+        options.sky = false;
+        background(87, 255, 249);
+        fill(106, 255, 61);
+        rect(-1,370,600,30);
+        character();
+        PlayerX = 20;
+        PlayerY = 355;
+        fill(0, 0, 0);
+        text("Pause Menu",7,12);
+        fill(255, 255, 255);
+        if(mouseX>100*scaleAmount&&mouseX<300*scaleAmount&&mouseY>50*scaleAmount&&mouseY<80*scaleAmount) {
+            fill(204, 204, 204);
+        }
+        rect(100,50,200,30);
+        
+        fill(255, 255, 255);
+        if(mouseX>100*scaleAmount&&mouseX<300*scaleAmount&&mouseY>100*scaleAmount&&mouseY<130*scaleAmount) {
+            fill(204, 204, 204);
+        }
+        rect(100,100,200,30);
+        fill(255, 255, 255);
+        if(mouseX>100*scaleAmount&&mouseX<300*scaleAmount&&mouseY>140*scaleAmount&&mouseY<180*scaleAmount) {
+            fill(204, 204, 204);
+        }
+        rect(100,140,200,30);
+        if(mousePressed&&mouseX>100*scaleAmount&&mouseX<300*scaleAmount&&mouseY>50*scaleAmount&&mouseY<80*scaleAmount) {
+            options.sky = true;
+            pause = false;
+        }
+        if(optionsScreen === false&&mousePressed&&mouseX>100*scaleAmount&&mouseX<300*scaleAmount&&mouseY>100*scaleAmount&&mouseY<130*scaleAmount) {
+            options.sky = true;
+            optionsScreen=true;
+            //pause = false;
+        }
+        if(mousePressed&&mouseX>100*scaleAmount&&mouseX<300*scaleAmount&&mouseY>100*scaleAmount&&mouseY<130*scaleAmount) {
+            options.sky = true;
+            optionsScreen=true;
+            //pause = false;
+        }
+        if(optionsScreen===false&&mousePressed&&mouseX>100*scaleAmount&&mouseX<300*scaleAmount&&mouseY>140*scaleAmount&&mouseY<180*scaleAmount) {
+            level=0;
+            pause = false;
+            options.sky=true;
+            
+        }
+        fill(0, 0, 0);
+        text("Resume",173,62);
+        text("Options",173,120);
+        text("Main Menu",173,160);
+    }
+    //options screen
+    if(optionsScreen === true) {
+        WhatsNew=false;
+            //background(51, 51, 51);
+            background(87, 255, 249);
+            fill(106, 255, 61);
+        rect(-1,370,600,30);
+        character();
+        fill(random(0,255),random(0,255),random(0,255));
+        if(options.FancyGraphics===false) {
+        fill(random(0,255));
+        }
+        if(BasicPortals===true) {
+                fill(b1,b2,b3);
+        }
+    rect(340,337,50,50,30);
+            fill(0, 0, 0);
+            textSize(20);
+            textAlign(CENTER,CENTER);
+            text("Options",200,15);
+            textSize(12);
+            textAlign(CENTER,CENTER);
+            fill(255, 255, 255);
+            //sky
+            if(mouseX>140*scaleAmount&&mouseX<260*scaleAmount&&mouseY>30*scaleAmount&&mouseY<60*scaleAmount) {
+                fill(86, 60, 252);
+            if(options.FancyGraphics===false){
+                    fill(82, 82, 82);
+                }
+        }
+        if(mousePressed&&mouseX>140*scaleAmount&&mouseX<260*scaleAmount&&mouseY>30*scaleAmount&&mouseY<60*scaleAmount) {
+                options.sky=options.sky?false:true;
+                mousePressed=false;
+        }
+        stroke(0, 0, 0);
+            rect(140,30,120,30);
+            //FancyGraphics
+            fill(255, 255, 255);
+            if(mouseX>140*scaleAmount&&mouseX<260*scaleAmount&&mouseY>70*scaleAmount&&mouseY<100*scaleAmount) {
+                fill(86, 60, 252);
+            if(options.FancyGraphics===false){
+                    fill(82, 82, 82);
+                }
+        }
+        if(mousePressed&&mouseX>140*scaleAmount&&mouseX<260*scaleAmount&&mouseY>70*scaleAmount&&mouseY<100*scaleAmount) {
+                options.FancyGraphics=options.FancyGraphics?false:true;
+                mousePressed=false;
+        }
+        stroke(0, 0, 0);
+            rect(140,70,120,30);
+        //Mobile mode
+            fill(255, 255, 255);
+            if(mouseX>140*scaleAmount&&mouseX<260*scaleAmount&&mouseY>110*scaleAmount&&mouseY<140*scaleAmount) {
+                fill(86, 60, 252);
+            if(options.FancyGraphics===false){
+                    fill(82, 82, 82);
+                }
+        }
+        if(mousePressed&&mouseX>140*scaleAmount&&mouseX<260*scaleAmount&&mouseY>110*scaleAmount&&mouseY<140*scaleAmount) {
+                options.mobile=options.mobile?false:true;
+                mousePressed=false;
+                if(options.mobile===true) {
+                    mobile=true;
+                } else {
+                    mobile=false;
+                }
+        }
+        stroke(0, 0, 0);
+            rect(140,110,120,30);
+        //cheat mode
+            fill(255, 255, 255);
+            if(mouseX>140*scaleAmount&&mouseX<260*scaleAmount&&mouseY>150*scaleAmount&&mouseY<180*scaleAmount) {
+                fill(86, 60, 252);
+            if(options.FancyGraphics===false){
+                    fill(82, 82, 82);
+                }
+        }
+        if(mousePressed&&mouseX>140*scaleAmount&&mouseX<260*scaleAmount&&mouseY>150*scaleAmount&&mouseY<180*scaleAmount) {
+                options.cheats=options.cheats?false:true;
+                mousePressed=false;
+        }
+        stroke(0, 0, 0);
+            rect(140,150,120,30);
+			
+			
+			//basic portals
+			fill(255, 255, 255);
+			if(mouseX>140*scaleAmount&&mouseX<260*scaleAmount&&mouseY>190*scaleAmount&&mouseY<230*scaleAmount) {
+                fill(86, 60, 252);
+            if(options.FancyGraphics===false){
+                    fill(82, 82, 82);
+                }
+        }
+			stroke(0, 0, 0);
+            rect(140,190,120,30);
+			if(mousePressed&&mouseX>140*scaleAmount&&mouseX<260*scaleAmount&&mouseY>190*scaleAmount&&mouseY<230*scaleAmount) {
+                options.portals=options.portals?false:true;
+                mousePressed=false;
+        }
+            //rest
+        
+            fill(0, 0, 0);
+            text("Fancy Sky: " + options.sky,200,40);
+            text("Fancy Graphics: " + options.FancyGraphics,200,80);
+            text("Mobile mode: " + options.mobile,200,120);
+            text("Cheats mode: " + options.cheats,200,160);
+			text("Basic Portal: " + options.portals,200,200);
+            fill(255, 255, 255);
+            if(mouseX>170*scaleAmount&&mouseX<235*scaleAmount&&mouseY>350*scaleAmount&&mouseY<397*scaleAmount) {
+                fill(86, 60, 252);
+            if(options.FancyGraphics===false){
+                    fill(82, 82, 82);
+                }
+        }
+        stroke(0, 0, 0);
+            rect(170,350,60,30);
+            fill(0, 0, 0);
+            text("Back",200,367);
+            if(mousePressed&&mouseX>170*scaleAmount&&mouseX<235*scaleAmount&&mouseY>350*scaleAmount&&mouseY<397*scaleAmount) {
+            optionsScreen = false;
+            textAlign("CENTER");
+            var x = random(0,1);
+        }
+		
+		if(options.portals===true) {
+		BasicPortals=true;
+		}
+		
+		if(options.portals===false) {
+		BasicPortals=false;
+		}
+        }
+    //mobile mode
+    var error = function(r) {
+    draw= function() {
+    background(255, 255, 255);
+    fill(0, 0, 0);
+    text(r,10,10);
+    };
+};
+    if(mobile===true&&level>=1&&optionsScreen===false&&WhatsNew===false&&pause===false) {
+        //stroke(255, 0, 0);
+        fill(255, 0, 0, 100);
+        rect(150,360,100,30);
+        fill(0, 0, 0,150);
+        rect(200,360,1,30);
+        if(mousePressed&&mouseX>200) {
+            PlayerX=PlayerX+2;
+        }
+        if(mousePressed&&mouseX<200) {
+            PlayerX=PlayerX-2;
+        }
+        else {
+        }
+        if(mouseX===200*scaleAmount&&mousePressed) {
+		draw=function() {
+			background(100,100,255);
+			color(255,255,255);
+			textSize(30);
+            text("System Error( MouseX = 200)",10,30);
+			textSize(15);
+            text("Please press the reset button to the right of the program",10,70);
+            
+			};
+        }
+    }
+};
+
+
+
+</script>
+<canvas id="mycanvas"></canvas>
+</div>
+</body>
+
+</html>
