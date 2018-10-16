@@ -1,0 +1,208 @@
+
+
+html, #game {
+}
+
+body {
+	background-color:black;
+	color:white;
+	margin: 0;
+	font-family: 'Chicle', cursive;
+	font-family: 'Cedarville Cursive', cursive;
+	font-family: 'Pacifico', cursive;
+	font-family: 'Crete Round', serif;
+	font-family: 'Ultra', serif;
+}
+
+
+
+
+.tooltip {
+    position: relative;
+    display: block;
+}
+
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 80px;
+	color:black;
+    background-color: grey;
+    color: #fff;
+    text-align: center;
+    padding-bottom: 1px;
+    border-radius: 1px;
+    position: absolute;
+	top: 0px;
+    left: 80px;
+    z-index: 0;
+}
+
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+
+.resetbtn{
+	position:absolute;
+	background-color:rgb(255,255,255);
+    padding: 18px;
+}
+
+.resetbtn:hover{
+	background-color:rgb(200,200,200);
+	position:absolute;
+    padding: 18px;
+	color:blue;
+}
+
+
+#head {
+	
+	margin:3px;
+	margin-left: 0px;
+	color:blue;
+	text-align:center;
+}
+
+#howtoplay {
+	position:absolute;
+	margin:3px;
+	margin-left: 75px;
+	
+	text-align:left;
+}
+
+#game {
+	 margin: auto;
+    width: 40%;
+    
+    padding: 10px;
+	
+
+}
+
+#navbar {
+	text-align:left;
+	font-size:30px;
+	background-color: rgb(90,90,240);
+	
+}
+
+#logo {
+	
+	padding-bottom:0px;
+	padding-top:0px;
+	padding-left:0px;
+	padding-right:0px;
+	
+}
+
+
+
+#exercise {
+	text-align:left;
+}
+a:link {
+	color:black;
+	text-decoration:none;
+}
+a:hover {
+		font-size:18px;
+		color:skyblue;
+		text-decoration:underline;
+		
+		
+}
+
+a:visited {
+	color:black;
+}
+a:visited:hover {
+	font-size:18px;
+	color:skyblue;
+	text-decoration:underline;
+}
+
+.menubtn {
+	
+	font-family: 'Crete Round', serif;
+	background-color: rgb(90,90,240);
+    color: white;
+    padding: 20px;
+    font-size: 18px;
+    border: none;
+}
+
+.dropdown-content1 {
+	font-family: 'Pacifico', cursive;
+    display: none;
+	font-size:18px;
+    position: absolute;
+    background-color: rgb(200,200,250);
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content1 a {
+    color: black;
+	font-size:18px;
+    padding: 12px 15px;
+    text-decoration: none;
+    display: block;
+}
+
+
+.dropdown-content1 a:hover {background-color: rgb(0,0,250); color:white;}
+
+.menu:hover .dropdown-content1 {display: block; color:white;}
+
+.menu:hover .menubtn {background-color: rgb(90,160,220); 
+color:white;
+font-size:18px;
+}
+
+
+
+
+
+
+
+
+
+.menubtn2 {
+	font-family: 'Crete Round', serif;
+	background-color: rgb(90,90,240);
+    color: white;
+    padding: 20px;
+    font-size: 18px;
+    border: none;
+}
+
+.dropdown-content2 {
+	font-family: 'Pacifico', cursive;
+    display: none;
+	font-size:18px;
+    position: absolute;
+    background-color: rgb(200,200,250);
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content2 a {
+    color: black;
+	font-size:18px;
+    padding: 12px 15px;
+    text-decoration: none;
+    display: block;
+}
+
+
+.dropdown-content2 a:hover {background-color: rgb(0,0,250); color:white;}
+
+.menu2:hover .dropdown-content2 {display: block; color:white;}
+
+.menu2:hover .menubtn2 {background-color: rgb(90,160,220); color:white;}

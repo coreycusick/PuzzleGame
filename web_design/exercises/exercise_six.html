@@ -1,0 +1,138 @@
+<!DOCTYPE html><!--Defines the document as an HTML5 document-->
+<html><!--Start of html document-->
+
+	<head><!--Contains information about the document. Anything in the head tag is not viewable to the audience.-->
+		<title>Exercise Six - Corey Cusick</title><!--The title text that appears in the browser or browser tab-->
+		
+		<meta charset="utf-8"><!--Specifies the character encoding used in the html document-->
+		
+		<meta name="keywords" content="images, links, multimedia, web design, Mrs. Adami"><!--Keywords are used for search engines-->
+		
+		<meta name="description" content="In exercise six, the students will learn how to ad images and multimedia files to thie website. The students will be able to insert images by using the file name and website URL."><!--Description is used to describe the website to the web browser-->
+		
+		<meta name="author" content="Corey Cusick"><!-- Who created the webpage-->
+		<link rel="stylesheet" href="style.css">
+		<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+	</head><!--Closing Head-->
+	
+	<body><!--Element will contain the content displayed by the browser-->
+		
+		<div id="navbar">
+			<div style="display:inline-block;" id="logo">
+				<img align="center" src="./images/logo.svg" height="40px" alt = "ERROR" width="40px"</img> |
+			</div>
+			<div style="display: inline-block;" class="menu">
+  <button style="" class="menubtn">Vocab</button>
+  <div class="dropdown-content1">
+			<a href="/21.Corey.Cusick/web_design/vocabulary/default.html" target="_blank" >Definitions Page</a>
+			
+  </div>
+  
+  |
+ 
+  </div>
+  <div id="menubar"
+  <div style="display: inline-block;" class="menu2">
+  <button class="menubtn2">Exercises</button> |
+  <div class="dropdown-content2">
+			
+			<a href="/21.Corey.Cusick/web_design/vocabulary/default.html" target=_blank >Exercise One</a>
+				<a href="exercise_two.html" target=_blank >Exercise Two</a></li>
+				<a href="./exercise_three/exercise_three.html" target=_blank >Exercise Three</a>
+				<a href="exercise_four.html" target=_blank >Exercise Four</a>
+				<a href="exercise_five.html" target=_blank >Exercise Five</a>
+				<a href="exercise_six.html" target=_blank >Exercise Six</a>
+				<a href="exercise_seven.html" target=_blank >Exercise Seven</a>
+				<a href="exercise_eight.html" target=_blank >Exercise Eight</a>
+				<a href="exercise_nine.html" target=_blank >Exercise Nine</a>
+				<a href="exercise_ten.html" target=_blank >Exercise Ten</a>
+  </div>
+  
+  </div>
+  
+  <div style="display: inline-block;" class="menu2">
+  <button class="menubtn2">BPA</button> |
+  <div class="dropdown-content2">
+			
+			<a href="\\studentfiles\21.Corey.Cusick\web_design\BPA\Game\main.html" target="_blank">Game(OLD) </a>
+			<a href="\\studentfiles\21.Corey.Cusick\web_design\BPA\Game\mainNew.html" target="_blank">Game(NEW) </a>
+  </div>
+  
+  </div>
+  
+  
+  </div>
+</div>
+	<div id="content"> 
+			<br>
+			<br>
+			<br>
+	<div id="video">
+	<iframe src="https://www.youtube.com/embed/AWm_mkbdpCA?autoplay=1" allow="autoplay;" allowfullscreen height="200" width="300"></iframe>
+	<iframe width="640" height="360" src="https://www.youtube.com/embed/UlaZfOiGaCU?autoplay=1?start=30" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+	</div>
+	
+	<h1>HTML Inserting Multimedia</h1>
+	
+	<h2>Purpose of using images</h2>
+	<p>Adding images to a website is simple, easy, and makes the website look more attractive. Adding images allows the user to interact more and gather information quicker than reading  bunch of text. If you have a step by step instruction, you could add images to help with understanding. However, there are some things to follow when adding images to a website.</p>
+	
+	<ul>
+	<li><strong><u>Do not use</u></strong> high resolution photos on the website. If you use high res photos, the photos will slow down the site and take a long time to load</li>
+	<li>Even tho you</li>
+	<li>Do not use "bad looking"</li>
+	<li>Try to keep the images small</li>
+	</ul>
+	<p>There are multiple different types of images that work well in specific instances. Sometimes you will use different file extensions for different purposes.</p>
+	<h2>Types of Images</h2>
+	<ul>
+	<li><strong>Vector Image</strong> - an image comprised of lines and curves that are based on mathmatical functions</li>
+	<li><strong>Bitmap Image</strong> - an image that is comprised of pixels in which every pixel is marked with a different color. Due to the amount of pixels, bitmap images are considerably larger compared to vector images</li>
+	
+	<dl>
+		<dt>Scalable Vector Graphics (SVG)</dt>
+			<dd>An XML markup language that can be created using a basic text editor and knowledge of the SVG language</dd>
+		<dt>Graphics Interchangeable format (GIF) </dt>
+			<dd>This photo can be used to support transparent colors, can also be used for animated images. They have a limited color palette, they are typically not suitable for photos</dd>
+		<dt>Joint Photographic Experts Group (JPEG or JPG)</dt>
+			<dd>These types of photos can support up to 16M colors and is the most popular photo format. These can be compressed to save space compared to most bitmap images. JPGs do not support transparency or animations</dd>
+		<dt>Portable Network Graphics (PNG)</dt>
+			<dd>Created to replace GIFs, supports transparency and over 1M colors, this file can also be compressed, making it smaller than a GIF. They are usually used for logo designs because they support transparency</dd>
+	</dl>
+	</ul>
+	<p>Images are measured in pixels. A pixel is the smallest unit of measurement on a computer and an image is made up of thousands to millions of pixels. Whenever we set a width or height, the pixel measurement will be used, unless otherwise stated. </p>
+	
+	<h2>Relative multimedia</h2>
+	<p>Relative multimedia tools works the same as Relative Links. We must locate the file that we want to embed on our website. You need to have the correct file name, file extension, and no misspellings.</p>
+	
+	<h2>Absolute Multimedia files</h2>
+	
+	<p>Absolute media files work very similar to absolute links. We are able to embed videos and photos based on a web address/URL. Here we will go ahead and embed both an image using a URL and a video using the iframe tag</p>
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/x_-x4Dwz-rU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+	
+	
+	<h3>Aligning images</h3>
+	<p>You can align/position your images in a couple different ways. This allows the flow of the web page to be more cohesive for the user. Some pictures can align with a certain position on a site, while others may align itself with text. You can align your image by using the align attribute. However, for you to center your image, you will need to understand how CSS works (for whatever reason), which will be discussed in later exercises.</p>
+	
+	<h4>Align=”bottom” (default)</h4>
+	<h4>Align=”middle”</h4>
+	<h4>align=”top”</h4>
+	<h4>align=”right”</h4>
+	<h4>align=”left”</h4>
+	
+	<p>Now this is some text. Here is some other text.” We are going to put an image in between the two sentences for each example. Use the smiley.gif locate from Google Classroom. Set the alt text to “Smiley Face”, and the width and height to 42 pixels</p>
+	
+	<h2>Linking images</h2>
+	<p>Linking images is very helpful when building a website. You can link a logo back to the homepage, link merchandise to a check out page, or just to make a photo gallery and link the photo to a larger image. Linking in general is extremely helpful, but linking images allows you to make the website a tad bit more interactive.</p>
+<a href="https://www.youtube.com/watch?v=AWm_mkbdpCA" target="_blank"><img src="images/scream.jpg" width="200" height="300" alt="Scream 1 movie poster"></a>
+<a href="https://www.youtube.com/watch?v=1IpGyf-RCaQ" target="_blank"><img src="images/scream2.jpg" width="200" height="300" alt="Scream 2 movie poster"></a>
+<a href="https://www.youtube.com/watch?v=1IpGyf-RCaQ&t=2s" target="_blank"><img src="images/scream3.jpg" width="200" height="300" alt="Scream 3 movie poster"></a>
+<a href="https://www.youtube.com/watch?v=HXYD8dCTqiI" target="_blank"><img src="images/scream4.jpg" width="200" height="300" alt="Scream 4 movie poster"></a>
+
+
+
+
+	</div>
+	</body><!--Closing Body Tag-->
+</html><!--Closing HTML document-->

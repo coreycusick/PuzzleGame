@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Puzzle Game Alpha</title>
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div id="navbar">
+			<div style="display:inline-block;" id="logo">
+				<img align="center" src="./images/logo.svg" height="40px" alt = "ERROR" width="40px"</img> |
+			</div>
+			<div style="display: inline-block;" class="menu">
+  <button style="" class="menubtn">Vocab</button>
+  <div class="dropdown-content1">
+			<a href="/21.Corey.Cusick/web_design/vocabulary/default.html" target="_blank" >Definitions Page</a>
+			
+  </div>
+  
+  |
+ 
+  </div>
+  
+  <div style="display: inline-block;" class="menu2">
+  <button class="menubtn2">Exercises</button> |
+  <div class="dropdown-content2">
+			
+			<a href="/21.Corey.Cusick/web_design/vocabulary/default.html" target=_blank >Exercise One</a>
+				<a href="/21.Corey.Cusick/web_design/exercises/exercise_two.html" target=_blank >Exercise Two</a></li>
+				<a href="/21.Corey.Cusick/web_design/exercises//exercise_three/exercise_three.html" target=_blank >Exercise Three</a>
+				<a href="/21.Corey.Cusick/web_design/exercises/exercise_four.html" target=_blank >Exercise Four</a>
+				<a href="/21.Corey.Cusick/web_design/exercises/exercise_five.html" target=_blank >Exercise Five</a>
+				<a href="/21.Corey.Cusick/web_design/exercises/exercise_six.html" target=_blank >Exercise Six</a>
+				<a href="/21.Corey.Cusick/web_design/exercises/exercise_seven.html" target=_blank >Exercise Seven</a>
+				<a href="/21.Corey.Cusick/web_design/exercises/exercise_eight.html" target=_blank >Exercise Eight</a>
+				<a href="/21.Corey.Cusick/web_design/exercises/exercise_nine.html" target=_blank >Exercise Nine</a>
+				<a href="/21.Corey.Cusick/web_design/exercises/exercise_ten.html" target=_blank >Exercise Ten</a>
+  </div>
+  
+  </div>
+  
+  <div style="display: inline-block;" class="menu2">
+  <button class="menubtn2">BPA</button>
+  <div class="dropdown-content2">
+			
+			<a href="\\studentfiles\21.Corey.Cusick\web_design\BPA\Game\puzzlegame.html" target="_blank">Puzzle Game </a>
+			<a href="\\studentfiles\21.Corey.Cusick\web_design\BPA\Game\balldrop.html" target="_blank">Ball Drop </a>
+  </div>
+  </div>
+  
+  
+  </div>
+
+<div id="main">
+<div id="head">
+<h1>Ball Drop</h1>
+</div>
+
+<div id="howtoplay">
+	<p>How to Play:</p>
+	<p>Use A and D to get the ball to land on the moving rectangle at the bottom<p>
+</div>
+
+<div id="reset">
+
+<div class="tooltip">
+<button onClick="history.go(0)" class="resetbtn">Reset</button>
+  <span class="tooltiptext"> - Reset Game</span>
+</div>
+
+<!--
+<INPUT TYPE="button" onClick="history.go(0)" VALUE="Refresh">
+-->
+
+</div>
+</div>
+
+
+
+<div id="game">
+<script src="processing.js"></script>
+<script type="text/processing" data-processing-target="mycanvas">
+void setup() {
+  size(800, 800);
+}
+var scaleAmount = 2;
+frameRate(10);
+var v1 = 140;
+var v2 = 100;
+var x = 210;
+var y = 15;
+var score = 0;
+var lives = 3;
+var m = 0;
+var multi = 10;
+var game = 0;
+var diff = 0;
+draw= function() {
+scale(scaleAmount);
+    if(game === 0) {
+      background(21, 61, 0);
+      fill(119, 255, 0);
+    stroke(119, 255, 0);
+    textSize(20);
+      text("Select Difficulty",130,40);
+      rect(150,60,100,30);
+      if(mousePressed&&mouseX>150*scaleAmount&&mouseX<250*scaleAmount&&mouseY>60*scaleAmount&&mouseY<90*scaleAmount) {
+          diff = 1;
+          game = 1;
+      }
+      if(mousePressed&&mouseX>150*scaleAmount&&mouseX<250*scaleAmount&&mouseY>120*scaleAmount&&mouseY<150*scaleAmount) {
+          diff = 2;
+          game = 1;
+      }
+      if(mousePressed&&mouseX>150*scaleAmount&&mouseX<250*scaleAmount&&mouseY>180*scaleAmount&&mouseY<210*scaleAmount) {
+          diff = 3;
+          game = 1;
+      }
+      rect(150,120,100,30);
+      rect(150,180,100,30);
+      fill(21,61,0);
+      text("Easy",180,80);
+      text("Medium",170,140);
+      text("Hard",180,205);
+    }
+    if(game === 1) {
+    background(21, 61, 0);
+    fill(119, 255, 0);
+    stroke(119, 255, 0);
+    rect(x,y,20,20);
+    if(x<v1+v2&&x>v1&&y>=388) {
+    score = score + 1;
+    v1 = random(100,300);
+    if(diff===1) {
+    if(multi<10) {
+    multi=multi+1.1;
+    }
+    }
+    if(diff===2) {
+    if(multi<15) {
+    multi=multi+1.2;
+    }
+    }
+    if(diff===3) {
+        if(multi<100) {
+    multi=multi+1.5;
+        }
+    }
+    y = 15;
+    } else {
+        y=y+multi;
+    }
+    
+    if(keyPressed&&keyCode === LEFT) {
+        x = x - 10;
+    }
+    if(keyPressed&&keyCode === RIGHT) {
+        x = x + 10;
+    }
+    if(x<=100) {
+        x = 100;
+    }
+    if(x>=378) {
+        x = 379;
+    }
+    if(y>400) {
+    y=-10;
+    score = score -1;
+    v1 = random(100,300);
+    lives = lives - 1;
+    if(multi>4) {
+    multi = multi-multi/2;
+    }
+    }
+    fill(119, 255, 0);
+    noStroke();
+    rect(-1,-1,100,405);
+    fill(21, 61, 0);
+    textSize(15);
+    text("Score: "+score,10,20);
+    text("Lives: "+lives,10,35);
+    text("Difficulty"+diff,10,10);
+    fill(119, 255, 0);
+    rect(v1,390,v2,10);
+    if(lives < 1) {
+        v1 = 100;
+v2 = 100;
+x = 210;
+y = 15;
+        m=m+2;
+        fill(21, 61, 0,m);
+        rect(-1,-1,600,600);
+        fill(119, 255, 0);
+        textSize(50);
+        text("Game Over",72,100);
+        textSize(20);
+        text("Score: " + score,160,140);
+        if(score <=0) {
+            text("You did Terrible",140,220);
+        }
+        if(score >=0&&score<10) {
+            text("You did bad",140,220);
+        }
+        if(score >=10&&score<20) {
+            text("You did OK",140,220);
+        }
+        if(score >=20&&score<40) {
+            text("Great Job",160,220);
+        }
+        if(score >=40&&score<60) {
+            text("Awesome",160,220);
+        }
+        if(score >=60){
+            text("Amazing",160,220);
+        }
+        if(mousePressed) {
+            lives = 3;
+            score = 0;
+        game = 0;
+        multi = 2;
+        }
+    }
+    }
+};
+
+</script>
+<canvas id="mycanvas"></canvas>
+</div>
+</body>
+
+</html>
